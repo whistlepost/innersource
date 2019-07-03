@@ -1,0 +1,91 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+//        classpath 'org.figurate:gradle-bundle-plugin:1.0.1-SNAPSHOT'
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+apply plugin: 'java'
+//apply plugin: 'bundle'
+apply plugin: 'docker'
+
+repositories {
+    mavenCentral()
+}
+
+jar.enabled = false
+
+task bundleApp(type:Jar) {
+    manifest {
+        attributes(
+                'Sling-Initial-Content': "SLING-INF/content;path:=/apps/$project.name;overwrite:=true",
+                'Bundle-Name': "$project.name-app",
+                'Bundle-SymbolicName': "${project.name}.$project.name-app"
+        )
+    }
+    baseName = "$project.name-app"
+    from('src/app') {
+        into 'SLING-INF/content'
+    }
+}
+
+task bundleConfig(type:Jar) {
+    manifest {
+        attributes(
+                'Sling-Initial-Content': 'SLING-INF/content;overwrite:=false',
+                'Bundle-Name': "$project.name-config",
+                'Bundle-SymbolicName': "${project.name}.$project.name-config"
+        )
+    }
+    baseName = "$project.name-config"
+    from('src/config') {
+        into 'SLING-INF/content'
+    }
+}
+
+task bundleContent(type:Jar) {
+    manifest {
+        attributes(
+                'Sling-Initial-Content': "SLING-INF/content;path:=/content/$project.name;overwrite:=true",
+                'Bundle-Name': "$project.name-content",
+                'Bundle-SymbolicName': "${project.name}.$project.name-content"
+        )
+    }
+    baseName = "$project.name-content"
+    from('src/content') {
+        into 'SLING-INF/content'
+    }
+}
+
+artifacts {
+    archives bundleApp
+    archives bundleConfig
+    archives bundleContent
+}
+
+docker {
+    baseImage "micronode/whistlepost:1.1.4-develop-SNAPSHOT"
+    maintainer project.property('organization')
+}
+
+task buildDocker(type: Docker) {
+    applicationName = project.name
+    tagVersion = 'latest'
+    push 'true' == project.property('docker_push')
+    apiUsername = project.property('docker_apiUsername')
+    apiPassword = project.property('docker_apiPassword')
+    apiEmail = project.property('docker_apiEmail')
+    configurations.archives.allArtifacts.findAll({it.file.exists()}).each {
+        addFile it.file, "/opt/sling/sling/startup/${project.property('bundleStartLevel')}/"
+    }
+    addFile 'sling.properties', '/opt/sling/'
+}
