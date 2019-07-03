@@ -1,0 +1,6 @@
+{
+  "title": "Inner Source",
+  "description": "Implementing Open Source principles in organisations",
+  "sling:resourceType": "innersource/page/index",
+  "jcr:primaryType":"nt:unstructured"
+}
