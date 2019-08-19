@@ -1,0 +1,14 @@
+/* === Noto Serif - regular */
+@font-face {
+	font-family: 'Noto Serif';
+	font-style: normal;
+	font-weight: 400;
+	src: url("./../fonts/NotoSerif-Regular.eot");
+	src: local("Noto Serif"),
+		local("NotoSerif"),
+		url("./../fonts/NotoSerif-Regular.eot") format("embedded-opentype"),
+		url("./../fonts/NotoSerif-Regular.woff2") format("woff2"),
+		url("./../fonts/NotoSerif-Regular.woff") format("woff"),
+		url("./../fonts/NotoSerif-Regular.ttf") format("truetype"),
+		url("./../fonts/NotoSerif-Regular.svg") format("svg");
+}

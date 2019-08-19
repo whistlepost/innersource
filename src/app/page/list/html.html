@@ -1,0 +1,11 @@
+<html>
+<head data-th-replace="/apps/innersource/page/fragments/layout.html::header"></head>
+<body>
+<ul>
+    <li data-th-each="row : ${resource.getChild('list').getChildren()}">
+        <span data-th-text="${row.valueMap['title']}">Placeholder</span>
+    </li>
+</ul>
+<span data-th-replace="/apps/innersource/page/fragments/layout.html::footer"/>
+</body>
+</html>

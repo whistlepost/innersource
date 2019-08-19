@@ -1,0 +1,5 @@
+{
+  "title": "Inner Source",
+  "sling:resourceType": "innersource/header",
+  "jcr:primaryType":"nt:unstructured"
+}

@@ -1,0 +1,11 @@
+{
+    "title": "Inner Source",
+    "sling:resourceType":"wp/sitemap",
+    "jcr:primaryType":"nt:unstructured",
+    "change-frequency": "weekly",
+    "url-base": "http://www.innersource.info",
+    "uris": [
+        "/index.html",
+        "/about.html"
+    ]
+}

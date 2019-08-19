@@ -1,0 +1,13 @@
+{
+  "title": "Inner Source",
+  "sling:resourceType":"innersource/footer",
+  "jcr:primaryType":"nt:unstructured",
+  "copyright": "2019 Ben Fortuna",
+  "banner": {
+    "sling:resourceType":"wnews/block/banner",
+    "jcr:primaryType":"nt:unstructured",
+    "title": "Accommodation",
+    "href": "/content/wnews/waranga-tourism.html",
+    "blockHtml": "<img src=\"/content/wnews/media/s3./wnews/waranga_tourism.png\" alt=\"Waranga Tourism image\"/>"
+  }
+}

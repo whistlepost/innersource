@@ -1,0 +1,10 @@
+<html>
+<head data-th-replace="/apps/innersource/page/fragments/layout.html::header"></head>
+<body>
+<h1 class="ui header" data-th-text="${resource.valueMap['title']}">Placeholder</h1>
+<p data-th-each="par : ${resource.valueMap['pars']}">
+    <span id="name" data-th-text="${par}">Placeholder</span>
+</p>
+<span data-th-replace="/apps/innersource/page/fragments/layout.html::footer"/>
+</body>
+</html>
